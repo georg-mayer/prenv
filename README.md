@@ -4,9 +4,9 @@ Environment variables preprocessor e.g. for docker-compose, docker, python and p
 
 > _Keep your `.env` file the single source of environment variable defintion!_
 
-> prenv keeps your coding projects variable names and values aligned over any kind of programming langugae or configuration file. 
+> prenv keeps variable names and values aligned in any kind of project and any kind of programming langugae or configuration file! 
 
-> prenv solves the "no includes" problem for docker/docker-compose files
+> prenv solves the "no includes" problem for docker/docker-compose files!
 
 
 &nbsp;  
@@ -85,31 +85,35 @@ project:
 ```
 Note that you can re-use the same variable names in e.g. python to read all these variables e.g. into a dictionary. So the `prenv-env_var.py` file:
 ```
+import os
+
 def read_envs() -> dict:
     """
     reads all gloable variables into a dict
     """
     env_dict: dict = dict()
 
-    ##PRENV##env_dict['$VAR'] = "$VAL"
-    
+    ##PRENV##env_dict['$VAR'] = os.getenv('$VAR')
+
     return env_dict
 ```
 
 after running prenv becomes the `env_var.py` file:
 ```
+import os
+
 def read_envs() -> dict:
     """
     reads all gloable variables into a dict
     """
     env_dict: dict = dict()
 
-    ##PRENV##env_dict['$VAR'] = "$VAL"
-    env_dict['PROJECTNAME'] = "prenv_is_so_cooool"
-    env_dict['LOGLEVEL'] = "INFO"
-    env_dict['BASEURL'] = "127.0.0.1:8001"
-    env_dict['CONTEXT'] = "./../../.."
-    env_dict['LOCALBASEDIR'] = "${CONTEXT}/${PROJECTNAME}"
+    ##PRENV##env_dict['$VAR'] = os.getenv('$VAR')
+    env_dict['PROJECTNAME'] = os.getenv('PROJECTNAME')
+    env_dict['LOGLEVEL'] = os.getenv('LOGLEVEL')
+    env_dict['BASEURL'] = os.getenv('BASEURL')
+    env_dict['CONTEXT'] = os.getenv('CONTEXT')
+    env_dict['LOCALBASEDIR'] = os.getenv('LOCALBASEDIR')
 
     return env_dict
 ```
