@@ -1,0 +1,16 @@
+variables:
+    ##PRENV##- $VAR=$VAL
+    - PROJECTNAME=prenv_is_so_cooool
+    - LOGLEVEL=INFO
+    - BASEURL=127.0.0.1:8001
+    - CONTEXT=./../../..
+    - LOCALBASEDIR=${CONTEXT}/${PROJECTNAME}
+
+project:
+    args:
+        //PRENV//ENV $VAR=${VAR}
+        ENV PROJECTNAME=${PROJECTNAME}
+        ENV LOGLEVEL=${LOGLEVEL}
+        ENV BASEURL=${BASEURL}
+        ENV CONTEXT=${CONTEXT}
+        ENV LOCALBASEDIR=${LOCALBASEDIR}

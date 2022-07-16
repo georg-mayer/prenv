@@ -1,0 +1,6 @@
+variables:
+    ##PRENV##- $VAR=$VAL
+
+project:
+    args:
+        //PRENV//ENV $VAR=${VAR}
